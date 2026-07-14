@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "outside": "block",
+  "zones": [
+    {
+      "id": "lockfiles",
+      "action": "block",
+      "paths": ["package-lock.json", "pnpm-lock.yaml", "yarn.lock"],
+      "reason": "lockfiles are generated; hand edits desynchronize them from package.json",
+      "hint": "run the package manager instead and commit what it writes"
+    },
+    {
+      "id": "migrations",
+      "action": "block",
+      "paths": ["db/migrations/*.sql"],
+      "except": ["db/migrations/README.md"],
+      "ops": ["edit", "delete", "rename"],
+      "reason": "applied migrations are append-only history",
+      "hint": "add a new migration instead of rewriting one that may have run"
+    },
+    {
+      "id": "generated-client",
+      "action": "block",
+      "paths": ["src/generated/"],
+      "reason": "generated from the OpenAPI spec — regenerate, don't patch",
+      "hint": "edit api/openapi.yaml and run the codegen script"
+    },
+    {
+      "id": "secrets",
+      "action": "block",
+      "paths": [".env", ".env.*"],
+      "except": [".env.example"],
+      "reason": "secrets must never be edited by automation"
+    },
+    {
+      "id": "release-metadata",
+      "action": "ask",
+      "paths": ["CHANGELOG.md", "package.json"],
+      "reason": "release metadata needs human sign-off"
+    },
+    {
+      "id": "build-output",
+      "action": "warn",
+      "paths": ["dist/", "coverage/"],
+      "reason": "generated output — the next build will overwrite this change"
+    }
+  ],
+  "tests": [
+    { "name": "the lockfile is fenced at the root", "path": "package-lock.json", "expect": "block", "zone": "lockfiles" },
+    { "name": "nested workspace lockfiles are fenced too", "path": "packages/api/pnpm-lock.yaml", "expect": "block", "zone": "lockfiles" },
+    { "name": "editing an applied migration is blocked", "path": "db/migrations/0042_add_index.sql", "op": "edit", "expect": "block", "zone": "migrations" },
+    { "name": "creating a new migration is allowed", "path": "db/migrations/0043_new_table.sql", "op": "create", "expect": "allow" },
+    { "name": "the migrations readme is a carve-out", "path": "db/migrations/README.md", "expect": "allow" },
+    { "name": "generated client code is fenced", "path": "src/generated/client/api.ts", "expect": "block", "zone": "generated-client" },
+    { "name": "the env file is fenced", "path": ".env.production", "expect": "block", "zone": "secrets" },
+    { "name": "the example env file is fair game", "path": ".env.example", "expect": "allow" },
+    { "name": "the changelog needs a human", "path": "CHANGELOG.md", "expect": "ask", "zone": "release-metadata" },
+    { "name": "build output only warns", "path": "dist/main.js", "expect": "warn", "zone": "build-output" },
+    { "name": "ordinary source files are allowed", "path": "src/routes/users.ts", "expect": "allow" },
+    { "name": "traversal cannot dodge the lockfile fence", "path": "src/../package-lock.json", "expect": "block", "zone": "lockfiles" }
+  ]
+}

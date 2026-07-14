@@ -1,0 +1,7 @@
+diff --git a/db/migrations/0042_add_index.sql b/db/migrations/0042_add_index.sql
+index a1b2c3d..d4e5f6a 100644
+--- a/db/migrations/0042_add_index.sql
++++ b/db/migrations/0042_add_index.sql
+@@ -1,2 +1,2 @@
+-create index concurrently idx_users_email on users (email);
++create unique index concurrently idx_users_email on users (email);

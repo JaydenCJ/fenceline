@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "zones": [
+    {
+      "id": "license",
+      "action": "block",
+      "paths": ["LICENSE", "LICENSE.*", "NOTICE"],
+      "reason": "license text is legally load-bearing and not the agent's to change"
+    },
+    {
+      "id": "public-api-surface",
+      "action": "ask",
+      "paths": ["src/index.ts", "src/types.ts"],
+      "reason": "the exported surface is semver-relevant; a human decides"
+    },
+    {
+      "id": "vendored",
+      "action": "block",
+      "paths": ["vendor/", "third_party/"],
+      "reason": "vendored dependencies are not yours to edit",
+      "hint": "patch upstream and re-vendor"
+    }
+  ],
+  "tests": [
+    { "name": "the license is fenced", "path": "LICENSE", "expect": "block", "zone": "license" },
+    { "name": "renaming the license is fenced too", "path": "LICENSE", "op": "rename", "expect": "block", "zone": "license" },
+    { "name": "the public entrypoint needs a human", "path": "src/index.ts", "expect": "ask", "zone": "public-api-surface" },
+    { "name": "internal modules are fair game", "path": "src/internal/cache.ts", "expect": "allow" },
+    { "name": "vendored code is fenced at any depth", "path": "third_party/zlib/inflate.c", "expect": "block", "zone": "vendored" }
+  ]
+}

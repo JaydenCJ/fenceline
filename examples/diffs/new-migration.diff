@@ -1,0 +1,10 @@
+diff --git a/db/migrations/0043_new_table.sql b/db/migrations/0043_new_table.sql
+new file mode 100644
+index 0000000..b2c3d4e
+--- /dev/null
++++ b/db/migrations/0043_new_table.sql
+@@ -0,0 +1,4 @@
++create table audit_log (
++  id bigserial primary key,
++  created_at timestamptz not null default now()
++);

@@ -1,0 +1,53 @@
+{
+  "name": "fenceline",
+  "version": "0.1.0",
+  "description": "Declarative protected-path rules for repositories: one reviewable fence file naming the no-touch zones (lockfiles, migrations, generated code), enforced as agent hooks and a standalone checker. Zero runtime dependencies, fully offline.",
+  "author": "JaydenCJ",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "fenceline": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test \"tests/*.test.mjs\"",
+    "smoke": "bash scripts/smoke.sh"
+  },
+  "keywords": [
+    "agents",
+    "policy",
+    "guardrails",
+    "hooks",
+    "lockfiles",
+    "protected-paths",
+    "code-review"
+  ],
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaydenCJ/fenceline.git"
+  },
+  "homepage": "https://github.com/JaydenCJ/fenceline#readme",
+  "bugs": {
+    "url": "https://github.com/JaydenCJ/fenceline/issues"
+  }
+}

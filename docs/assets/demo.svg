@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="506" viewBox="0 0 760 506" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+  <rect width="760" height="506" rx="10" fill="#0d1117"/>
+  <rect width="760" height="34" rx="10" fill="#161b22"/>
+  <circle cx="20" cy="17" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="17" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="17" r="6" fill="#28c840"/>
+  <text x="380" y="21" fill="#8b949e" text-anchor="middle">fenceline — the no-touch zones of your repo, declared in one file</text>
+
+  <text x="24" y="64" fill="#7ee787">$ fenceline init --preset node</text>
+  <text x="24" y="86" fill="#c9d1d9">wrote fenceline.json (preset node: 5 zones, 8 embedded tests)</text>
+  <text x="24" y="104" fill="#c9d1d9">next: fenceline test &amp;&amp; fenceline hooks claude-code</text>
+
+  <text x="24" y="140" fill="#7ee787">$ fenceline check package-lock.json src/app.ts</text>
+  <text x="24" y="162" fill="#c9d1d9"><tspan fill="#f85149">BLOCK</tspan>  package-lock.json  [zone lockfiles] lockfiles are generated; hand edits</text>
+  <text x="24" y="180" fill="#c9d1d9">       desynchronize them from the manifest — run your package manager</text>
+  <text x="24" y="198" fill="#c9d1d9">       (npm/pnpm/yarn/bun install) instead</text>
+  <text x="24" y="218" fill="#c9d1d9"><tspan fill="#3fb950">ALLOW</tspan>  src/app.ts</text>
+  <text x="24" y="236" fill="#c9d1d9">checked 2 paths: 1 allow, 1 block, 0 warn, 0 ask</text>
+  <text x="24" y="254" fill="#8b949e">exit code 1 — the commit / tool call is refused</text>
+
+  <text x="24" y="290" fill="#7ee787">$ fenceline check --explain "src/../package-lock.json"</text>
+  <text x="24" y="312" fill="#c9d1d9"><tspan fill="#f85149">BLOCK</tspan>  package-lock.json  [zone lockfiles] lockfiles are generated; hand edits</text>
+  <text x="24" y="330" fill="#c9d1d9">       desynchronize them from the manifest — run your package manager</text>
+  <text x="24" y="348" fill="#c9d1d9">       (npm/pnpm/yarn/bun install) instead</text>
+  <text x="24" y="366" fill="#d29922">   1. lockfiles -&gt; block: matched "package-lock.json" (op: edit)</text>
+  <text x="24" y="384" fill="#8b949e">traversal normalized away — the dodge lands on the same fence</text>
+
+  <text x="24" y="420" fill="#7ee787">$ fenceline hooks claude-code --write &amp;&amp; fenceline hooks git --write</text>
+  <text x="24" y="442" fill="#c9d1d9">installed PreToolUse hook in .claude/settings.json</text>
+  <text x="24" y="460" fill="#c9d1d9">installed .git/hooks/pre-commit</text>
+
+  <text x="24" y="490" fill="#8b949e">lockfiles · migrations · generated code · one fence file · agent hooks + pre-commit · zero deps</text>
+</svg>
