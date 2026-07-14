@@ -2,7 +2,7 @@
   "name": "fenceline",
   "version": "0.1.0",
   "description": "Declarative protected-path rules for repositories: one reviewable fence file naming the no-touch zones (lockfiles, migrations, generated code), enforced as agent hooks and a standalone checker. Zero runtime dependencies, fully offline.",
-  "author": "JaydenCJ",
+  "author": "JaydenCJ <aisingioro.kiyon@gmail.com>",
   "license": "MIT",
   "type": "module",
   "bin": {
